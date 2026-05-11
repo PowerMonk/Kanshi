@@ -1,0 +1,418 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Robot Pal v1.0 - Mission Control</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#5b3800",
+              "on-secondary-fixed-variant": "#665500",
+              "outline-variant": "#484847",
+              "primary-fixed": "#ff7a2f",
+              "surface-container-lowest": "#000000",
+              "surface-bright": "#2c2c2c",
+              "inverse-surface": "#fcf9f8",
+              "on-surface": "#ffffff",
+              "surface-container-high": "#20201f",
+              "on-error-container": "#ffd2c8",
+              "on-tertiary": "#5c3800",
+              "on-secondary": "#5b4b00",
+              "primary-container": "#ff7a2f",
+              "surface-variant": "#262626",
+              "secondary-fixed": "#ffd709",
+              error: "#ff7351",
+              "inverse-on-surface": "#565555",
+              surface: "#0e0e0e",
+              primary: "#ff9159",
+              "on-secondary-fixed": "#453900",
+              outline: "#767575",
+              "on-error": "#450900",
+              "inverse-primary": "#a14100",
+              "on-primary-fixed": "#000000",
+              "surface-container-low": "#131313",
+              "surface-container": "#1a1a1a",
+              "error-container": "#b92902",
+              "on-background": "#ffffff",
+              "primary-fixed-dim": "#f66700",
+              "secondary-fixed-dim": "#efc900",
+              "error-dim": "#d53d18",
+              background: "#0e0e0e",
+              "on-primary-container": "#401500",
+              "tertiary-dim": "#ed9900",
+              "secondary-container": "#705d00",
+              secondary: "#ffd709",
+              "on-primary": "#531e00",
+              "tertiary-container": "#ffa504",
+              "secondary-dim": "#efc900",
+              "surface-container-highest": "#262626",
+              "on-surface-variant": "#adaaaa",
+              "on-tertiary-fixed": "#311c00",
+              "on-primary-fixed-variant": "#4f1c00",
+              tertiary: "#ffb95c",
+              "on-tertiary-container": "#4f3000",
+              "on-secondary-container": "#fff7e6",
+              "primary-dim": "#ff7524",
+              "surface-dim": "#0e0e0e",
+              "tertiary-fixed-dim": "#ed9900",
+              "surface-tint": "#ff9159",
+              "tertiary-fixed": "#ffa504",
+            },
+            fontFamily: {
+              headline: ["Plus Jakarta Sans"],
+              body: ["Plus Jakarta Sans"],
+              label: ["Plus Jakarta Sans"],
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: #0e0e0e;
+        background-image: radial-gradient(
+          circle at 50% -20%,
+          #262626 0%,
+          #0e0e0e 100%
+        );
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .gradient-glow {
+        box-shadow: 0 0 40px rgba(255, 145, 89, 0.2);
+      }
+      .btn-primary-gradient {
+        background: linear-gradient(135deg, #ff9159 0%, #ff7a2f 100%);
+      }
+      .side-nav-glow {
+        box-shadow: 10px 0 50px rgba(0, 0, 0, 0.5);
+      }
+      .card-vibrant {
+        background-color: #222222; /* Slightly lighter charcoal */
+        border: 1px solid rgba(255, 145, 89, 0.15); /* Subtle safety orange border */
+        box-shadow:
+          0 20px 40px -10px rgba(0, 0, 0, 0.5),
+          0 0 20px rgba(255, 145, 89, 0.05); /* Orange glow */
+      }
+      .card-vibrant-secondary {
+        background-color: #222222;
+        border: 1px solid rgba(255, 215, 9, 0.15); /* Hazard yellow border */
+        box-shadow:
+          0 20px 40px -10px rgba(0, 0, 0, 0.5),
+          0 0 20px rgba(255, 215, 9, 0.05); /* Yellow glow */
+      }
+    </style>
+  </head>
+  <body class="text-on-surface overflow-hidden" data-page="control">
+    <!-- TopNavBar (Simplified) -->
+    <header
+      class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-5 bg-[#1a1a1a]/80 backdrop-blur-lg border-b border-white/5"
+    >
+      <div class="flex items-center gap-6">
+        <span
+          class="text-2xl font-black text-[#ff9159] tracking-tighter flex items-center gap-2"
+        >
+          <span
+            class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-black"
+          >
+            <span
+              class="material-symbols-outlined text-xl"
+              data-icon="smart_toy"
+              >smart_toy</span
+            >
+          </span>
+          Robot Pal v1.0
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="btn-primary-gradient text-black font-extrabold px-8 py-2.5 rounded-full hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_4px_25px_rgba(255,145,89,0.5)]"
+          data-session-toggle
+        >
+          Start Session
+        </button>
+      </div>
+    </header>
+    <!-- SideNavBar -->
+    <aside
+      class="fixed left-0 top-0 h-full flex flex-col p-6 bg-[#1a1a1a] z-40 w-72 rounded-r-[3rem] border-r border-white/5 side-nav-glow"
+    >
+      <div class="pt-24 h-full flex flex-col justify-between">
+        <nav class="flex flex-col gap-4 flex-grow justify-center">
+          <a
+            class="flex items-center gap-4 btn-primary-gradient text-[#0e0e0e] rounded-2xl px-6 py-4 shadow-[0_10px_30px_rgba(255,145,89,0.35)] font-['Plus_Jakarta_Sans'] text-xs font-black uppercase tracking-widest transition-all hover:scale-105"
+            href="index.html"
+          >
+            <span class="material-symbols-outlined" data-icon="joystick"
+              >joystick</span
+            >
+            <span>Control Center</span>
+          </a>
+
+          <a
+            class="flex items-center gap-4 text-white/60 px-6 py-4 rounded-2xl hover:bg-white/5 hover:text-white transition-all font-['Plus_Jakarta_Sans'] text-xs font-black uppercase tracking-widest group"
+            href="SessionLogs.html"
+          >
+            <span
+              class="material-symbols-outlined group-hover:text-secondary transition-colors"
+              data-icon="history"
+              >history</span
+            >
+            <span>Mission Logs</span>
+          </a>
+
+          <a
+            class="flex items-center gap-4 text-white/60 px-6 py-4 rounded-2xl hover:bg-white/5 hover:text-white transition-all font-['Plus_Jakarta_Sans'] text-xs font-black uppercase tracking-widest group"
+            href="AIconfig.html"
+          >
+            <span
+              class="material-symbols-outlined group-hover:text-secondary transition-colors"
+              data-icon="settings"
+              >settings</span
+            >
+            <span>Systems</span>
+          </a>
+        </nav>
+
+        <div class="pb-8">
+          <button
+            class="w-full bg-error text-white font-black py-4 rounded-2xl shadow-[0_8px_30px_rgba(213,61,24,0.4)] hover:brightness-110 active:scale-[0.98] transition-all uppercase text-xs tracking-[0.2em] border border-white/10"
+            data-command="stop"
+          >
+            Emergency Stop
+          </button>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="ml-72 pt-24 px-8 pb-4 h-screen flex flex-col">
+      <div class="flex flex-col gap-4 max-w-[1400px] mx-auto w-full h-full">
+        <!-- Video Feed Section -->
+        <section class="flex-grow min-h-0">
+          <div
+            class="relative bg-surface-container-low rounded-[3rem] overflow-hidden h-full shadow-[0_40px_100px_rgba(0,0,0,0.8)] border-white/5 border-2 gradient-glow"
+          >
+            <img
+              alt="Main Camera Feed"
+              class="w-full h-full object-cover opacity-90 scale-105"
+              data-alt="First-person view from a sleek robot exploring a modern minimalist home interior with cinematic lighting and soft bokeh effects"
+              data-stream-image
+              data-stream-url="http://192.168.4.1:8080/?action=stream"
+              src="http://192.168.4.1:8080/?action=stream"
+            />
+            <!-- HUD Overlays -->
+            <div class="absolute top-8 left-8 flex gap-4">
+              <div
+                class="bg-surface/60 backdrop-blur-xl px-5 py-2.5 rounded-full border border-primary/20 flex items-center gap-3 shadow-[0_0_15px_rgba(255,145,89,0.2)]"
+              >
+                <div
+                  class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_#ff9159]"
+                ></div>
+                <span
+                  class="text-[0.65rem] font-black uppercase tracking-[0.15em]"
+                  data-stream-status
+                  >Live Feed: CONNECTING</span
+                >
+              </div>
+            </div>
+            <div class="absolute top-8 right-8 flex gap-3">
+              <div
+                class="bg-surface/60 backdrop-blur-xl px-5 py-2.5 rounded-full border border-secondary/20 flex items-center gap-2 shadow-[0_0_15px_rgba(255,215,9,0.2)]"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-sm"
+                  data-icon="podium"
+                  >podium</span
+                >
+                <span
+                  class="text-[0.65rem] font-black uppercase tracking-[0.15em] text-secondary"
+                  data-latency
+                  >Latency: --</span
+                >
+              </div>
+            </div>
+            <div class="absolute bottom-8 left-8">
+              <div class="card-vibrant backdrop-blur-2xl px-8 py-5 rounded-3xl">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 bg-primary/20 rounded-xl">
+                    <span
+                      class="material-symbols-outlined text-primary"
+                      data-icon="sensors"
+                      >sensors</span
+                    >
+                  </div>
+                  <div>
+                    <p
+                      class="text-[0.6rem] font-black uppercase text-white/40 mb-1 tracking-widest"
+                    >
+                      Bot Status
+                    </p>
+                    <h1
+                      class="text-3xl font-black text-white tracking-tighter flex items-center gap-2"
+                      data-bot-status
+                    >
+                      IDLE <span class="text-primary opacity-50">•</span>
+                      <span class="text-sm font-medium text-white/60"
+                        >STANDBY</span
+                      >
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Vignette and HUD lines -->
+            <div
+              class="absolute inset-0 pointer-events-none border-[60px] border-black/10 rounded-[3rem]"
+            ></div>
+          </div>
+        </section>
+        <!-- Control Panel -->
+        <section class="w-full flex justify-center pb-20">
+          <div
+            class="card-vibrant backdrop-blur-md rounded-[2.5rem] p-5 flex flex-col items-center gap-4 w-full max-w-sm"
+          >
+            <div class="flex items-center gap-4 w-full">
+              <div class="h-[1px] flex-grow bg-primary/10"></div>
+              <h3
+                class="text-[0.6rem] font-black uppercase tracking-[0.25em] text-primary/60 whitespace-nowrap"
+              >
+                Tactical Movement
+              </h3>
+              <div class="h-[1px] flex-grow bg-primary/10"></div>
+            </div>
+            <!-- Standard WASD Layout -->
+            <div class="flex flex-col items-center gap-2">
+              <!-- W Key -->
+              <button
+                class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all group active:scale-95 shadow-lg"
+                data-command="forward"
+              >
+                <div class="flex flex-col items-center">
+                  <span
+                    class="text-[0.6rem] font-black text-white/20 group-hover:text-primary/40 mb-0.5"
+                    >↑</span
+                  >
+                  <span
+                    class="text-lg font-black text-white group-hover:text-primary transition-colors font-headline"
+                    >W</span
+                  >
+                </div>
+              </button>
+              <!-- ASD Keys -->
+              <div class="flex gap-2">
+                <button
+                  class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all group active:scale-95 shadow-lg"
+                  data-command="left"
+                >
+                  <div class="flex flex-col items-center">
+                    <span
+                      class="text-[0.6rem] font-black text-white/20 group-hover:text-primary/40 mb-0.5"
+                      >←</span
+                    >
+                    <span
+                      class="text-lg font-black text-white group-hover:text-primary transition-colors font-headline"
+                      >A</span
+                    >
+                  </div>
+                </button>
+                <button
+                  class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all group active:scale-95 shadow-lg"
+                  data-command="backward"
+                >
+                  <div class="flex flex-col items-center">
+                    <span
+                      class="text-[0.6rem] font-black text-white/20 group-hover:text-primary/40 mb-0.5"
+                      >↓</span
+                    >
+                    <span
+                      class="text-lg font-black text-white group-hover:text-primary transition-colors font-headline"
+                      >S</span
+                    >
+                  </div>
+                </button>
+                <button
+                  class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all group active:scale-95 shadow-lg"
+                  data-command="right"
+                >
+                  <div class="flex flex-col items-center">
+                    <span
+                      class="text-[0.6rem] font-black text-white/20 group-hover:text-primary/40 mb-0.5"
+                      >→</span
+                    >
+                    <span
+                      class="text-lg font-black text-white group-hover:text-primary transition-colors font-headline"
+                      >D</span
+                    >
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Bottom HUD -->
+    <div class="fixed bottom-0 left-72 right-0 p-6 z-10 pointer-events-none">
+      <div
+        class="max-w-4xl mx-auto flex justify-center gap-8 pointer-events-auto"
+      >
+        <div
+          class="card-vibrant-secondary backdrop-blur-xl px-12 py-4 rounded-full flex items-center gap-8"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#ffd709]"
+            ></div>
+            <span
+              class="text-[0.65rem] font-black uppercase tracking-[0.15em] text-white/80"
+              >Safety Link Active</span
+            >
+          </div>
+          <div class="h-4 w-[1px] bg-white/10"></div>
+          <div class="flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-primary text-sm"
+              data-icon="verified_user"
+              >verified_user</span
+            >
+            <span
+              class="text-[0.65rem] font-black uppercase tracking-[0.15em] text-white/80"
+              >Manual Override Available</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="dist/index.js"></script>
+  </body>
+</html>

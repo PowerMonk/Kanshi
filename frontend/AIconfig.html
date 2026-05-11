@@ -1,0 +1,428 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Robot Pal v1.0 | Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#5b3800",
+              "on-secondary-fixed-variant": "#665500",
+              "outline-variant": "#484847",
+              "primary-fixed": "#ff7a2f",
+              "surface-container-lowest": "#000000",
+              "surface-bright": "#2c2c2c",
+              "inverse-surface": "#fcf9f8",
+              "on-surface": "#ffffff",
+              "surface-container-high": "#20201f",
+              "on-error-container": "#ffd2c8",
+              "on-tertiary": "#5c3800",
+              "on-secondary": "#5b4b00",
+              "primary-container": "#ff7a2f",
+              "surface-variant": "#262626",
+              "secondary-fixed": "#ffd709",
+              error: "#ff7351",
+              "inverse-on-surface": "#565555",
+              surface: "#0e0e0e",
+              primary: "#ff9159",
+              "on-secondary-fixed": "#453900",
+              outline: "#767575",
+              "on-error": "#450900",
+              "inverse-primary": "#a14100",
+              "on-primary-fixed": "#000000",
+              "surface-container-low": "#131313",
+              "surface-container": "#1a1a1a",
+              "error-container": "#b92902",
+              "on-background": "#ffffff",
+              "primary-fixed-dim": "#f66700",
+              "secondary-fixed-dim": "#efc900",
+              "error-dim": "#d53d18",
+              background: "#0e0e0e",
+              "on-primary-container": "#401500",
+              "tertiary-dim": "#ed9900",
+              "secondary-container": "#705d00",
+              secondary: "#ffd709",
+              "on-primary": "#531e00",
+              "tertiary-container": "#ffa504",
+              "secondary-dim": "#efc900",
+              "surface-container-highest": "#262626",
+              "on-surface-variant": "#adaaaa",
+              "on-tertiary-fixed": "#311c00",
+              "on-primary-fixed-variant": "#4f1c00",
+              tertiary: "#ffb95c",
+              "on-tertiary-container": "#4f3000",
+              "on-secondary-container": "#fff7e6",
+              "primary-dim": "#ff7524",
+              "surface-dim": "#0e0e0e",
+              "tertiary-fixed-dim": "#ed9900",
+              "surface-tint": "#ff9159",
+              "tertiary-fixed": "#ffa504",
+            },
+            fontFamily: {
+              headline: ["Plus Jakarta Sans"],
+              body: ["Plus Jakarta Sans"],
+              label: ["Plus Jakarta Sans"],
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        background: transparent;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        background: #262626;
+        height: 12px;
+        border-radius: 9999px;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 28px;
+        width: 28px;
+        background: #ff9159;
+        border-radius: 50%;
+        margin-top: -8px;
+        box-shadow: 0 0 15px rgba(255, 145, 89, 0.4);
+        cursor: pointer;
+      }
+      .glowing-card {
+        background-color: #1a1a1a;
+        border: 1px solid rgba(255, 145, 89, 0.2);
+        box-shadow: 0 0 20px rgba(255, 145, 89, 0.05);
+        transition: all 0.3s ease;
+      }
+      .glowing-card:hover {
+        border-color: rgba(255, 145, 89, 0.5);
+        box-shadow: 0 0 30px rgba(255, 145, 89, 0.15);
+        background-color: #222222;
+      }
+      .glowing-card-secondary {
+        background-color: #1a1a1a;
+        border: 1px solid rgba(255, 215, 9, 0.2);
+        box-shadow: 0 0 20px rgba(255, 215, 9, 0.05);
+        transition: all 0.3s ease;
+      }
+      .glowing-card-secondary:hover {
+        border-color: rgba(255, 215, 9, 0.5);
+        box-shadow: 0 0 30px rgba(255, 215, 9, 0.15);
+        background-color: #222222;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#0e0e0e] text-on-surface min-h-screen flex"
+    data-page="config"
+  >
+    <!-- Left Sidebar Navigation -->
+    <aside
+      class="fixed left-0 top-0 h-full w-72 flex flex-col items-center justify-between py-12 bg-[#0e0e0e] z-50"
+    >
+      <div class="text-2xl font-black text-[#ff9159] tracking-tighter">
+        Robot Pal v1.0
+      </div>
+
+      <nav class="flex flex-col gap-8 w-full px-6">
+        <a
+          class="flex items-center gap-4 text-white px-6 py-4 opacity-70 hover:opacity-100 hover:translate-x-1 transition-all"
+          href="index.html"
+        >
+          <span class="material-symbols-outlined">joystick</span>
+          <span class="font-bold text-[0.7rem] uppercase tracking-widest"
+            >Control Center</span
+          >
+        </a>
+
+        <a
+          class="flex items-center gap-4 text-white px-6 py-4 opacity-70 hover:opacity-100 hover:translate-x-1 transition-all"
+          href="SessionLogs.html"
+        >
+          <span class="material-symbols-outlined">history</span>
+          <span class="font-bold text-[0.7rem] uppercase tracking-widest"
+            >History</span
+          >
+        </a>
+
+        <a
+          class="flex items-center gap-4 bg-[#ff9159] text-[#0e0e0e] rounded-full px-8 py-4 shadow-[0_0_30px_rgba(255,145,89,0.4)] transition-all scale-105"
+          href="AIconfig.html"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >settings</span
+          >
+          <span class="font-bold text-[0.7rem] uppercase tracking-widest"
+            >Settings</span
+          >
+        </a>
+      </nav>
+
+      <div class="w-full px-6"></div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 ml-72 p-12 min-h-screen">
+      <div class="max-w-6xl mx-auto space-y-12">
+        <!-- Header Section with Session Button -->
+        <header class="flex justify-between items-start mb-16">
+          <div>
+            <h1
+              class="text-[4rem] font-black text-white leading-none tracking-tighter mb-4"
+            >
+              AI CONFIG
+            </h1>
+            <p class="text-on-surface-variant text-lg max-w-xl">
+              Adjust how your Robot Pal perceives the world. Fine-tune detection
+              parameters for optimal performance.
+            </p>
+          </div>
+          <button
+            class="bg-[#ff9159] text-[#531e00] font-black px-10 py-4 rounded-full active:scale-95 hover:shadow-[0_0_30px_rgba(255,145,89,0.3)] transition-all duration-200"
+            data-session-toggle
+          >
+            START SESSION
+          </button>
+        </header>
+        <!-- Settings Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Person Detection Toggle Card -->
+          <div
+            class="glowing-card p-12 rounded-[2.5rem] flex flex-col justify-between aspect-[1.4/1]"
+          >
+            <div>
+              <div
+                class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8"
+              >
+                <span class="material-symbols-outlined text-primary text-4xl"
+                  >person</span
+                >
+              </div>
+              <h3 class="text-3xl font-black mb-4">Person Detection</h3>
+              <p class="text-on-surface-variant text-lg leading-relaxed">
+                Automatically identify and track humans in the vicinity with
+                deep learning vision models.
+              </p>
+            </div>
+            <div class="mt-8">
+              <label
+                class="relative inline-flex items-center cursor-pointer group/toggle"
+              >
+                <input
+                  checked=""
+                  class="sr-only peer"
+                  type="checkbox"
+                  data-config-toggle="ai.personDetection"
+                />
+                <div
+                  class="w-24 h-12 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:rounded-full after:h-9 after:w-9 after:transition-all peer-checked:bg-primary shadow-inner"
+                ></div>
+                <span
+                  class="ml-6 text-sm font-black text-primary tracking-widest uppercase"
+                  data-toggle-label
+                  data-active-class="text-primary"
+                  data-inactive-class="text-white/40"
+                  >Active</span
+                >
+              </label>
+            </div>
+          </div>
+          <!-- Object Detection Toggle Card -->
+          <div
+            class="glowing-card-secondary p-12 rounded-[2.5rem] flex flex-col justify-between aspect-[1.4/1]"
+          >
+            <div>
+              <div
+                class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-8"
+              >
+                <span class="material-symbols-outlined text-secondary text-4xl"
+                  >category</span
+                >
+              </div>
+              <h3 class="text-3xl font-black mb-4">Object Detection</h3>
+              <p class="text-on-surface-variant text-lg leading-relaxed">
+                Categorize furniture, obstacles, and pet accessories to build an
+                environmental map.
+              </p>
+            </div>
+            <div class="mt-8">
+              <label
+                class="relative inline-flex items-center cursor-pointer group/toggle"
+              >
+                <input
+                  class="sr-only peer"
+                  type="checkbox"
+                  data-config-toggle="ai.objectDetection"
+                />
+                <div
+                  class="w-24 h-12 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:rounded-full after:h-9 after:w-9 after:transition-all peer-checked:bg-secondary shadow-inner"
+                ></div>
+                <span
+                  class="ml-6 text-sm font-black text-white/40 tracking-widest uppercase"
+                  data-toggle-label
+                  data-active-class="text-secondary"
+                  data-inactive-class="text-white/40"
+                  >Inactive</span
+                >
+              </label>
+            </div>
+          </div>
+          <!-- Drive Speed Slider Card -->
+          <div
+            class="glowing-card p-12 rounded-[2.5rem] flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8"
+              >
+                <span class="material-symbols-outlined text-primary text-4xl"
+                  >speed</span
+                >
+              </div>
+              <h3 class="text-3xl font-black mb-4">Drive Speed</h3>
+              <p class="text-on-surface-variant text-lg leading-relaxed">
+                Tune the motor speed limit for safe maneuvers and tighter indoor
+                control.
+              </p>
+            </div>
+            <div class="mt-8 space-y-6">
+              <input
+                class="w-full accent-primary h-3"
+                max="100"
+                min="0"
+                type="range"
+                value="85"
+                data-config-range="control.speedPercent"
+              />
+              <div class="text-right">
+                <span
+                  class="text-4xl font-black text-white leading-none tracking-tighter"
+                  data-range-output="control.speedPercent"
+                  >85</span
+                ><span class="text-xl text-primary ml-2">%</span>
+              </div>
+            </div>
+          </div>
+          <!-- Temperature Slider Card -->
+          <div
+            class="glowing-card-secondary p-12 rounded-[2.5rem] flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-8"
+              >
+                <span class="material-symbols-outlined text-secondary text-4xl"
+                  >thermostat</span
+                >
+              </div>
+              <h3 class="text-3xl font-black mb-4">Inference Temperature</h3>
+              <p class="text-on-surface-variant text-lg leading-relaxed">
+                Balance stability versus responsiveness for future AI inference
+                smoothing.
+              </p>
+            </div>
+            <div class="mt-8 space-y-6">
+              <input
+                class="w-full accent-primary h-3"
+                max="100"
+                min="0"
+                type="range"
+                value="50"
+                data-config-range="ai.temperature"
+              />
+              <div class="text-right">
+                <span
+                  class="text-4xl font-black text-white leading-none tracking-tighter"
+                  data-range-output="ai.temperature"
+                  >50</span
+                ><span class="text-xl text-secondary ml-2">%</span>
+              </div>
+            </div>
+          </div>
+          <!-- Sensitivity Slider Card (Large Span) -->
+          <div
+            class="md:col-span-2 glowing-card-secondary p-16 rounded-[3rem] mt-4"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-16"
+            >
+              <div class="flex-1">
+                <div class="flex items-center gap-5 mb-6">
+                  <span
+                    class="material-symbols-outlined text-secondary text-5xl"
+                    >tune</span
+                  >
+                  <h3 class="text-4xl font-black">Detection Sensitivity</h3>
+                </div>
+                <p
+                  class="text-on-surface-variant text-xl leading-relaxed max-w-lg"
+                >
+                  Adjust the threshold for AI certainty. Higher values reduce
+                  false positives but may miss subtle movements in low-light
+                  conditions.
+                </p>
+              </div>
+              <div class="flex-1 w-full space-y-10">
+                <div
+                  class="flex justify-between text-xs font-black text-white/40 tracking-[0.2em]"
+                >
+                  <span>CAUTIOUS</span>
+                  <span class="text-secondary">DYNAMIC</span>
+                  <span>AGGRESSIVE</span>
+                </div>
+                <div class="relative py-4">
+                  <input
+                    class="w-full accent-primary h-3"
+                    max="100"
+                    min="0"
+                    type="range"
+                    value="65"
+                    data-config-range="ai.confidence"
+                  />
+                </div>
+                <div class="text-right">
+                  <span
+                    class="text-[6rem] font-black text-white leading-none tracking-tighter"
+                    ><span data-range-output="ai.confidence">65</span
+                    ><span class="text-3xl text-primary ml-2">%</span></span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="dist/AIconfig.js"></script>
+  </body>
+</html>

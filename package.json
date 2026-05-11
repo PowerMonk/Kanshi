@@ -1,0 +1,17 @@
+{
+  "name": "kanshi-rc-ui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun build src/pages/index.ts src/pages/AIconfig.ts src/pages/SessionLogs.ts --outdir dist --target browser",
+    "dev": "bun run build && bun run server.ts",
+    "serve": "bun run server.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.6.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
